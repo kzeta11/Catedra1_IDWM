@@ -23,6 +23,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
+    await Seeders.SeedData(context);
 }
 
 // Configure the HTTP request pipeline.
