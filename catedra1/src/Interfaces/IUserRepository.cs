@@ -11,5 +11,7 @@ namespace catedra1.src.Interfaces
         Task<bool> ExistsByRut(string rut);
 
         Task<User> Post(User user);
+
+        Task<List<User>> GetAll();
     }
 }

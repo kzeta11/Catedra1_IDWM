@@ -32,5 +32,12 @@ namespace catedra1.src.Repositories
             return user;
         }
 
+        public async Task<List<User>> GetAll()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
+        
+
     }
 }

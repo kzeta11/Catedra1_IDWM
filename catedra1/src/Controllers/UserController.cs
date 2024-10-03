@@ -39,5 +39,14 @@ namespace catedra1.src.Controllers
                 return CreatedAtAction("CreateUser", new {id = userModel.Id}, userModel);
             }
         }
+
+        [HttpGet("")]
+
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userRepository.GetAll();
+            var UserDto = users.Select(x => x.ToUser());
+            return Ok(UserDto);
+        }
     }
 }

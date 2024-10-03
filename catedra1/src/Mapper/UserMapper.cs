@@ -9,6 +9,21 @@ namespace catedra1.src.Mapper
 {
     public static class UserMapper
     {
+
+        public static UserDto ToUser(this User userModel)
+        {
+            return new UserDto
+            {
+                Rut = userModel.Rut,
+                Nombre = userModel.Nombre,
+                Correo = userModel.Correo,
+                Genero = userModel.Genero,
+                FechaNacimiento = userModel.FechaNacimiento,
+            };
+        }
+        
+    
+
         public static User ToUserFromCreatedDto(this CreateUserDto createUserDto)
         {
             return new User
