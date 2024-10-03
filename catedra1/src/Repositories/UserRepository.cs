@@ -37,6 +37,19 @@ namespace catedra1.src.Repositories
             return await _context.Users.ToListAsync();
         }
 
+        public async Task<User?> Delete(int id)
+        {
+
+            var userModel = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (userModel == null)
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            _context.Users.Remove(userModel);
+            await _context.SaveChangesAsync();
+            return userModel;
+        }
+
 
         
 

@@ -13,5 +13,7 @@ namespace catedra1.src.Interfaces
         Task<User> Post(User user);
 
         Task<List<User>> GetAll();
+
+        Task<User?> Delete(int id);
     }
 }

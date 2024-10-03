@@ -59,19 +59,18 @@ namespace catedra1.src.Controllers
             return Ok(userModel);
         }
 
-        /**
+        
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
-            var user = await _userRepository.GetById(id);
+            var user = await _userRepository.Delete(id);
             if (user == null)
             {
                 return NotFound();
             }
-            await _userRepository.Delete(user);
-            return Ok();
-        }**/
+            return Ok("Usuario eliminado");
+        }
 
     }
 }
