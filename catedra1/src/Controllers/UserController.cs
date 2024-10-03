@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using catedra1.src.DTOs;
 using catedra1.src.Interfaces;
 using catedra1.src.Mapper;
+using catedra1.src.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace catedra1.src.Controllers
@@ -69,13 +70,16 @@ namespace catedra1.src.Controllers
 
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdateUser([FromBody] CreateUserDto createUserDto, [FromRoute] int id)
+        public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] UpdateUserDto updateUserDto)
         {
-            var userModel = createUserDto.ToUserFromCreatedDto();
-            userModel.Id = id;
-            await _userRepository.Post(userModel);
-            return Ok(userModel);
+            var userModel = await _userRepository.Put(id, updateUserDto);
+            if (userModel == null)
+            {
+                return NotFound();
+            }
+            return Ok(userModel.ToUser());
         }
+    
 
         
         [HttpDelete("{id}")]

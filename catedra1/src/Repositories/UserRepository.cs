@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using catedra1.src.Data;
+using catedra1.src.DTOs;
 using catedra1.src.Interfaces;
 using catedra1.src.Models;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,22 @@ namespace catedra1.src.Repositories
                 throw new Exception("Usuario no encontrado");
             }
             _context.Users.Remove(userModel);
+            await _context.SaveChangesAsync();
+            return userModel;
+        }
+
+        public async Task<User?> Put(int id, UpdateUserDto updateUserDto)
+        {
+            var userModel = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (userModel == null)
+            {
+                throw new Exception("Usuario no encontrado");
+            }
+            userModel.Rut = updateUserDto.Rut;
+            userModel.Nombre = updateUserDto.Nombre;
+            userModel.Correo = updateUserDto.Correo;
+            userModel.Genero = updateUserDto.Genero;
+            userModel.FechaNacimiento = updateUserDto.FechaNacimiento;
             await _context.SaveChangesAsync();
             return userModel;
         }
