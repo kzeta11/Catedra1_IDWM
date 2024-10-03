@@ -42,11 +42,29 @@ namespace catedra1.src.Controllers
 
         [HttpGet("")]
 
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers([FromQuery] string? sort = "asc", [FromQuery] string? gender = null)
         {
+            // Validaciones de los parámetros
+            if (sort != "asc" && sort != "desc")
+            {
+                return BadRequest("El parámetro 'sort' solo puede tener los valores 'asc' o 'desc'.");
+            }
+
+            var validGenders = new List<string> { "masculino", "femenino", "otro", "prefiero no decirlo" };
+            if (gender != null && !validGenders.Contains(gender.ToLower()))
+            {
+                return BadRequest("El parámetro 'gender' no es válido.");
+            }
             var users = await _userRepository.GetAll();
-            var UserDto = users.Select(x => x.ToUser());
-            return Ok(UserDto);
+            if (!string.IsNullOrEmpty(gender))
+            {
+                users = users.Where(u => u.Genero.Equals(gender, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            users = sort == "asc" ? users.OrderBy(u => u.Nombre).ToList() : users.OrderByDescending(u => u.Nombre).ToList();
+
+            var userDtos = users.Select(x => x.ToUser());
+
+            return Ok(userDtos);
         }
 
         [HttpPut("{id}")]
