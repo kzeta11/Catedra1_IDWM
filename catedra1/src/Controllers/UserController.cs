@@ -48,5 +48,30 @@ namespace catedra1.src.Controllers
             var UserDto = users.Select(x => x.ToUser());
             return Ok(UserDto);
         }
+
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> UpdateUser([FromBody] CreateUserDto createUserDto, [FromRoute] int id)
+        {
+            var userModel = createUserDto.ToUserFromCreatedDto();
+            userModel.Id = id;
+            await _userRepository.Post(userModel);
+            return Ok(userModel);
+        }
+
+        /**
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            var user = await _userRepository.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            await _userRepository.Delete(user);
+            return Ok();
+        }**/
+
     }
 }
