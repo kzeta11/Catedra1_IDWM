@@ -127,3 +127,4 @@ C:\Users\kevin\Desktop\Catedra1_IDWM\catedra1\obj\Debug\net8.0\refint\catedra1.d
 C:\Users\kevin\Desktop\Catedra1_IDWM\catedra1\obj\Debug\net8.0\catedra1.pdb
 C:\Users\kevin\Desktop\Catedra1_IDWM\catedra1\obj\Debug\net8.0\catedra1.genruntimeconfig.cache
 C:\Users\kevin\Desktop\Catedra1_IDWM\catedra1\obj\Debug\net8.0\ref\catedra1.dll
+C:\Users\kevin\Desktop\Catedra1_IDWM\catedra1\bin\Debug\net8.0\Cat1 IDWM.postman_collection.json
